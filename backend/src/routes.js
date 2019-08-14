@@ -33,6 +33,6 @@ routes.put('/meetups/:id', upload.single('banner'), MeetUpController.update);
 routes.delete('/meetups/:id', MeetUpController.destroy);
 
 routes.get('/inscriptions', InscriptionController.index);
-routes.post('/inscriptions/:id', InscriptionController.store);
+routes.post('/inscriptions/:meetUpId', InscriptionController.store);
 
 export default routes;

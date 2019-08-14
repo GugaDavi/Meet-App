@@ -17,11 +17,15 @@ class MeetUpController {
   async store(req, res) {
     const schema = Yup.object().shape({
       title: Yup.string().required(),
+      description: Yup.string().required(),
+      localization: Yup.string().required(),
       date: Yup.date().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Title or Date invalid' });
+      return res
+        .status(400)
+        .json({ error: 'Informações invalidas ou faltantes' });
     }
 
     const { title, description, localization, date } = req.body;
@@ -38,7 +42,7 @@ class MeetUpController {
       title,
       description,
       localization,
-      date,
+      date: startDate,
       banner,
       user_id,
     });
@@ -66,9 +70,9 @@ class MeetUpController {
 
     const { date } = req.body;
 
-    if (date) {
-      const dateStart = startOfDay(parseISO(date));
+    const dateStart = startOfDay(parseISO(date));
 
+    if (date) {
       if (isBefore(dateStart, new Date())) {
         return res.status(400).json({ error: 'Past dates are not permitted' });
       }

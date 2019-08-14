@@ -31,7 +31,7 @@ class InscriptionController {
   }
 
   async store(req, res) {
-    const meetup = await MeetUp.findByPk(req.params.id, {
+    const meetup = await MeetUp.findByPk(req.params.meetUpId, {
       include: [
         {
           model: User,

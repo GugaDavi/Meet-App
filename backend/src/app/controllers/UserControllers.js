@@ -12,13 +12,6 @@ class UserController {
       password: Yup.string()
         .required()
         .min(6),
-      confirmPassword: Yup.string().when(
-        'password',
-        (password, confirmPassword) =>
-          password
-            ? confirmPassword.required().oneOf([Yup.ref('password')])
-            : confirmPassword
-      ),
     });
 
     if (!(await schema.isValid(req.body))) {

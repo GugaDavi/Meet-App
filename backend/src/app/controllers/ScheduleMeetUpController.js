@@ -21,8 +21,6 @@ class ScheduleMeetUpController {
     const startHour = startOfDay(parseISO(date));
     const endHour = endOfDay(parseISO(date));
 
-    console.log(startHour, endHour);
-
     meetups = await MeetUp.findAll({
       where: {
         date: {
