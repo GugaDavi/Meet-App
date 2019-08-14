@@ -6,9 +6,10 @@ class FileController {
       where: {
         user_id: req.userId,
       },
+      attributes: ['id', 'name', 'path'],
     });
 
-    res.json({ files });
+    return res.json({ files });
   }
 
   async store(req, res) {
@@ -21,7 +22,7 @@ class FileController {
       user_id,
     });
 
-    res.json({ file });
+    return res.json({ file });
   }
 }
 
