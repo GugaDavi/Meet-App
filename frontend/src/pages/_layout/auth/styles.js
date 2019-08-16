@@ -29,8 +29,7 @@ export const Content = styled.div`
     input {
       border: 0px;
       border-radius: 4px;
-      background: rgba(0, 0, 0);
-      opacity: 0.2;
+      background: rgba(0, 0, 0, 0.3);
       padding: 14px 20px;
       font-size: 18px;
       color: #fff;
@@ -39,6 +38,12 @@ export const Content = styled.div`
       & + input {
         margin-top: 10px;
       }
+    }
+
+    span {
+      margin: 5px 0px;
+      text-align: left;
+      color: #f2994a;
     }
 
     button {
