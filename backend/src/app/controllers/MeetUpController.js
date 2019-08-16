@@ -1,4 +1,4 @@
-import { startOfDay, parseISO, isBefore } from 'date-fns';
+import { startOfHour, parseISO, isBefore } from 'date-fns';
 import * as Yup from 'yup';
 
 import MeetUp from '../models/MeetUp';
@@ -32,7 +32,7 @@ class MeetUpController {
     const { filename: banner } = req.file;
     const user_id = req.userId;
 
-    const startDate = startOfDay(parseISO(date));
+    const startDate = startOfHour(parseISO(date));
 
     if (isBefore(startDate, new Date())) {
       return res.status(400).json({ error: 'Past dates are not permitted' });
@@ -70,7 +70,7 @@ class MeetUpController {
 
     const { date } = req.body;
 
-    const dateStart = startOfDay(parseISO(date));
+    const dateStart = startOfHour(parseISO(date));
 
     if (date) {
       if (isBefore(dateStart, new Date())) {
