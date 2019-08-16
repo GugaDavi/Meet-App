@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 1024px;
@@ -36,9 +37,14 @@ export const Container = styled.div`
       font-size: 16px;
       line-height: 19px;
       color: #fff;
+      transition: background 0.3s;
 
       display: flex;
       align-items: center;
+
+      &:hover {
+        background: ${darken(0.05, '#f94d6a')};
+      }
     }
   }
 `;
