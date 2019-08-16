@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100%;
@@ -27,6 +28,11 @@ export const CreateMeetUp = styled(Link)`
   border-radius: 4px;
   color: #fff;
   font-weight: bold;
+  transition: background 0.3s;
+
+  &:hover {
+    background: ${darken(0.05, '#f94d6a')};
+  }
 `;
 export const MeetUpsList = styled.ul`
   li {
