@@ -10,9 +10,15 @@ class MeetUpController {
       where: {
         user_id: req.userId,
       },
+      include: [
+        {
+          model: File,
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
     });
 
-    return res.json({ meetups });
+    return res.json(meetups);
   }
 
   async store(req, res) {
