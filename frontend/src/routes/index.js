@@ -24,7 +24,7 @@ function Routes() {
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/meetup" component={CreateAndEditMeetUp} isPrivate />
-      <Route path="/meetup-datails" component={MeetUpDatails} isPrivate />
+      <Route path="/meetup-datails/:id" component={MeetUpDatails} isPrivate />
     </Switch>
   );
 }
