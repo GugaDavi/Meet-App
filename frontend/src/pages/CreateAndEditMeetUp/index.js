@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import { Form, Input, Textarea } from '@rocketseat/unform';
-import { MdCamera, MdAddCircleOutline } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { Form, Input } from '@rocketseat/unform';
+import { MdAddCircleOutline } from 'react-icons/md';
 
-import { Container, Image } from './styles';
+import { Container } from './styles';
 
 import SelectDate from './DatePicker';
+import BannerInput from './BannerInput';
+
+import { createMeetUpRequest } from '../../store/modules/meetup/actions';
 
 export default function CreateAndEditMeetUp() {
+  const dispatch = useDispatch();
+
   const [date, setDate] = useState();
 
   function handleNewMeetup(data) {
-    console.tron.log(date);
+    dispatch(createMeetUpRequest(data));
   }
 
   return (
     <Container>
       <Form onSubmit={handleNewMeetup}>
-        <Image>
-          <MdCamera size={55} color="#fff" />
-          <strong>Selecionar Foto</strong>
-        </Image>
+        <BannerInput name="banner_id" />
         <Input placeholder="Titulo do MeetUp" name="title" />
-        <Textarea placeholder="Descrição" name="discription" />
+        <Input multiline placeholder="Descrição" name="description" />
         <Input placeholder="Localização" name="localization" />
-        <SelectDate selected={date} onChange={d => setDate(d)} />
+        <SelectDate selected={date} setSelected={setDate} name="date" />
         <button type="submit">
           <MdAddCircleOutline size={20} color="#fff" />
           Salvar MeetUp

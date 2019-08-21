@@ -19,7 +19,7 @@ export const Container = styled.div`
       color: #fff;
       font-size: 18px;
       line-height: 21px;
-      margin: 10px 0px;
+      margin-bottom: 10px;
     }
 
     textarea {
@@ -55,25 +55,5 @@ export const Container = styled.div`
         background: ${darken(0.05, '#f94d6a')};
       }
     }
-  }
-`;
-
-export const Image = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 300px;
-  margin: 0px auto;
-  margin-bottom: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-
-  strong {
-    margin-top: 10px;
-    font-size: 20px;
-    line-height: 23px;
-    color: rgba(255, 255, 255, 0.3);
   }
 `;
