@@ -2,6 +2,7 @@ import { startOfHour, parseISO, isBefore } from 'date-fns';
 import * as Yup from 'yup';
 
 import MeetUp from '../models/MeetUp';
+import File from '../models/File';
 
 class MeetUpController {
   async index(req, res) {
@@ -28,8 +29,7 @@ class MeetUpController {
         .json({ error: 'Informações invalidas ou faltantes' });
     }
 
-    const { title, description, localization, date } = req.body;
-    const { filename: banner } = req.file;
+    const { title, description, localization, date, banner } = req.body;
     const user_id = req.userId;
 
     const startDate = startOfHour(parseISO(date));
@@ -43,11 +43,23 @@ class MeetUpController {
       description,
       localization,
       date: startDate,
-      banner,
+      banner_id: banner,
       user_id,
     });
 
-    return res.json({ meetUp });
+    const addBannerInfos = await MeetUp.findOne({
+      where: {
+        id: meetUp.id,
+      },
+      include: [
+        {
+          model: File,
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(addBannerInfos);
   }
 
   async update(req, res) {
@@ -96,7 +108,9 @@ class MeetUpController {
       return res.status(401).json({ error: 'You can not cancel past dates' });
     }
 
-    await meetup.destroy();
+    meetup.canceled_at = new Date();
+
+    await meetup.save();
 
     return res.send();
   }

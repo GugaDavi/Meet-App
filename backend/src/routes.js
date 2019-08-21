@@ -28,8 +28,8 @@ routes.get('/files', FileController.index);
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/meetups', MeetUpController.index);
-routes.post('/meetups', upload.single('banner'), MeetUpController.store);
-routes.put('/meetups/:id', upload.single('banner'), MeetUpController.update);
+routes.post('/meetups', MeetUpController.store);
+routes.put('/meetups/:id', MeetUpController.update);
 routes.delete('/meetups/:id', MeetUpController.destroy);
 
 routes.get('/inscriptions', InscriptionController.index);

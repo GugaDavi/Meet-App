@@ -23,9 +23,13 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      banner: {
-        type: Sequelize.STRING,
+      banner_id: {
+        type: Sequelize.INTEGER,
         allowNull: true,
+        references: {
+          model: 'files',
+          key: 'id',
+        },
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -37,6 +41,7 @@ module.exports = {
       },
       canceled_at: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
