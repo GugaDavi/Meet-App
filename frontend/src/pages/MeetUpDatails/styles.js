@@ -7,11 +7,17 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  img {
+  div.image {
     width: 100%;
-    height: 300px;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     box-shadow: 0 0px 15px rgba(113, 89, 193, 0.5);
+  }
+
+  img {
+    height: 300px;
   }
 
   time {

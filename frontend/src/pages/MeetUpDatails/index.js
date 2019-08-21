@@ -1,31 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { MdEvent, MdPlace } from 'react-icons/md';
+import PropTypes from 'prop-types';
 
 import { Container, Content, Title, Discription } from './styles';
 
+import error from '../../assets/error.png';
+
 import MeetUpController from './MeetUpController';
 
-import meetup from '../../assets/image.png';
+export default function MeetUpDatails({ match }) {
+  const { id } = match.params;
+  const meetups = useSelector(state => state.meetup.meetups);
+  const user = useSelector(state => state.user.profile);
 
-export default function MeetUpDatails() {
+  const selectMeetup = meetups[id];
+
+  console.tron.log(selectMeetup);
+
   return (
     <Container>
       <Content>
         <Title>
-          <strong>MeetUp de React Native</strong>
-          <MeetUpController major />
+          <strong>{selectMeetup.title}</strong>
+          <MeetUpController major={selectMeetup.user_id === user.id} />
         </Title>
-        <img src={meetup} alt="MeetUp" />
-        <Discription>Um MeetUp Massa Legal. Show de Boleta</Discription>
+        <div className="image">
+          <img
+            src={selectMeetup.File ? selectMeetup.File.url : error}
+            alt="MeetUp"
+          />
+        </div>
+        <Discription>{selectMeetup.description}</Discription>
         <time>
           <MdEvent size={20} color="#fff" style={{ marginRight: 5 }} />
-          24 de Junho, às 20h
+          {selectMeetup.dateFormatted}
         </time>
         <local>
           <MdPlace size={20} color="#fff" style={{ marginRight: 5 }} />
-          Rua Guilherme Gembal
+          {selectMeetup.localization}
         </local>
       </Content>
     </Container>
   );
 }
+
+MeetUpDatails.propTypes = {
+  match: PropTypes.object.isRequired,
+};
