@@ -1,19 +1,36 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 
-import { Container, Manager, NotManager } from './styles';
+import { Container, Manager, Canceled } from './styles';
 
-export default function MeetUpController({ major = false }) {
+import { cancelMeetUpRequest } from '../../../store/modules/meetup/actions';
+
+export default function MeetUpController({ canceled, meetupId }) {
+  const dispatch = useDispatch();
+
+  function handleCancelMeetup(meetuId) {
+    dispatch(cancelMeetUpRequest(meetuId));
+  }
+
   return (
     <Container>
-      {major ? (
+      {canceled ? (
+        <Canceled>
+          <strong>Evento Cancelado</strong>
+        </Canceled>
+      ) : (
         <Manager>
           <button className="edit" type="button">
             <MdEdit size={20} color="#fff" style={{ marginRight: 5 }} />
             Editar
           </button>
-          <button type="button" className="cancel">
+          <button
+            type="button"
+            className="cancel"
+            onClick={() => handleCancelMeetup(meetupId)}
+          >
             <MdDeleteForever
               size={20}
               color="#fff"
@@ -22,17 +39,12 @@ export default function MeetUpController({ major = false }) {
             Cancelar
           </button>
         </Manager>
-      ) : (
-        <NotManager>
-          <button className="subscribe" type="button">
-            Inscrever-se
-          </button>
-        </NotManager>
       )}
     </Container>
   );
 }
 
 MeetUpController.propTypes = {
-  major: PropTypes.bool.isRequired,
+  canceled: PropTypes.bool.isRequired,
+  meetupId: PropTypes.number.isRequired,
 };

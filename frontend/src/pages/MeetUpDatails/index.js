@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { MdEvent, MdPlace } from 'react-icons/md';
 import PropTypes from 'prop-types';
@@ -12,18 +12,19 @@ import MeetUpController from './MeetUpController';
 export default function MeetUpDatails({ match }) {
   const { id } = match.params;
   const meetups = useSelector(state => state.meetup.meetups);
-  const user = useSelector(state => state.user.profile);
 
   const selectMeetup = meetups[id];
 
   console.tron.log(selectMeetup);
 
+  const canceled = !!selectMeetup.canceled_at;
+
   return (
     <Container>
-      <Content>
-        <Title>
+      <Content canceled={canceled}>
+        <Title canceled={canceled}>
           <strong>{selectMeetup.title}</strong>
-          <MeetUpController major={selectMeetup.user_id === user.id} />
+          <MeetUpController canceled={canceled} meetupId={selectMeetup.id}/>
         </Title>
         <div className="image">
           <img

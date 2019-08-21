@@ -39,9 +39,16 @@ export function upDateMeetUpSuccess(data) {
   };
 }
 
-export function cancelMeetUp(meetupId) {
+export function cancelMeetUpRequest(meetupId) {
   return {
     type: '@meetup/CANCEL_MEETUP',
     payload: { meetupId },
   };
 }
+
+// export function cancelMeetUpSuccess(id) {
+//   return {
+//     type: '@meetup/CANCEL_MEETUP_SUCCESS',
+//     payload: { id },
+//   };
+// }

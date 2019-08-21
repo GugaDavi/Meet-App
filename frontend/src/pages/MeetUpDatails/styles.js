@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -38,6 +38,12 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
   }
+
+  ${props =>
+    props.canceled &&
+    css`
+      opacity: 0.5;
+    `}
 `;
 export const Title = styled.div`
   font-size: 32px;

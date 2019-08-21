@@ -9,7 +9,7 @@ import history from '../../../services/history';
 import { meetUpListSuccess, createMeetUpSuccess } from './actions';
 
 export function* meetUpList() {
-  const response = yield call(api.get, 'schedule');
+  const response = yield call(api.get, 'meetups');
 
   const data = response.data.map(meetup => ({
     ...meetup,
@@ -44,8 +44,6 @@ export function* createMeetUp({ payload }) {
       ),
     };
 
-    console.tron.log(data)
-
     yield put(createMeetUpSuccess(data));
 
     toast.success('MeetUp Criado com Sucesso!');
@@ -57,7 +55,18 @@ export function* createMeetUp({ payload }) {
   }
 }
 
+export function* cancelMeetUp({ payload }) {
+  const { meetupId } = payload;
+
+  yield call(api.delete, `meetups/${meetupId}`);
+
+  toast.info('MeetUp Cancelado com Sucesso');
+
+  history.push('/');
+}
+
 export default all([
   takeLatest('@meetup/CREATE_MEETUP_REQUEST', createMeetUp),
   takeLatest('@meetup/MEET_LIST_REQUEST', meetUpList),
+  takeLatest('@meetup/CANCEL_MEETUP', cancelMeetUp),
 ]);
