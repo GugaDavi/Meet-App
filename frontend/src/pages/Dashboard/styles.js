@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
@@ -54,6 +54,12 @@ export const MeetUpsList = styled.ul`
       line-height: 21px;
     }
 
+    strong.eventStatus {
+      font-size: 16px;
+      line-height: 19px;
+      color: #f94d6a;
+    }
+
     &:hover {
       background: rgba(0, 0, 0, 0.3);
     }
@@ -67,6 +73,6 @@ export const Infos = styled.div`
   line-height: 19px;
 
   time {
-    margin-right: 30px;
+    margin: 0px 30px;
   }
 `;

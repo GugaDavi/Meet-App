@@ -32,7 +32,7 @@ export const Container = styled.div`
       font-size: 18px;
       line-height: 21px;
       font-family: Roboto;
-      height: 200px;
+      height: 150px;
     }
 
     > button {

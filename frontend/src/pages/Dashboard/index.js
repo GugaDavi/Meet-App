@@ -24,9 +24,13 @@ export default function Dashboard() {
       <MeetUpsList>
         {meetUpList
           ? meetUpList.map((meetup, index) => (
-              <li key={meetup.id}>
+              <li key={meetup.id} active={!!meetup.canceled_at}>
                 <strong>{meetup.title}</strong>
+
                 <Infos>
+                  {meetup.canceled_at && (
+                    <strong className="eventStatus">Evento Cancelado</strong>
+                  )}
                   <time>{meetup.dateFormatted}</time>
                   <Link to={`meetup-datails/${index}`}>
                     <MdChevronRight size={24} color="#fff" />

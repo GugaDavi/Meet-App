@@ -62,6 +62,8 @@ export function* cancelMeetUp({ payload }) {
 
   toast.info('MeetUp Cancelado com Sucesso');
 
+  yield meetUpList();
+
   history.push('/');
 }
 
