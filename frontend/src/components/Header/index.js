@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <Container>
       <Content>
-        <Link to="dashboard">
+        <Link to="/">
           <img src={logo} alt="MeetApp" />
         </Link>
         <Profile>
