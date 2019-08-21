@@ -46,5 +46,11 @@ export const Container = styled.div`
         background: ${darken(0.05, '#f94d6a')};
       }
     }
+
+    span {
+      margin: 5px 0px;
+      text-align: left;
+      color: #f2994a;
+    }
   }
 `;
