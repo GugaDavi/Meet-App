@@ -17,7 +17,7 @@ export default function SignIn() {
   return (
     <>
       <img src={logo} alt="MeetApp" />
-      <Form onSubmit={handleSignIn}>
+      <Form onSubmit={handleSignIn} autoComplete="off">
         <Input placeholder="Digite seu e-mail" name="email" type="email" />
         <Input placeholder="Digite seu senha" name="password" type="password" />
         <button type="submit">Acessar</button>

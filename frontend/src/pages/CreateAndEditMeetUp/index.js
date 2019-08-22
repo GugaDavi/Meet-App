@@ -47,6 +47,7 @@ export default function CreateAndEditMeetUp({ history }) {
           meetupInfos === undefined ? handleNewMeetup : handleUpdateMeetup
         }
         initialData={meetupInfos}
+        autoComplete="off"
       >
         <BannerInput name="banner_id" />
         <Input placeholder="Titulo do MeetUp" name="title" />

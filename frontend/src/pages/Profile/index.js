@@ -46,6 +46,7 @@ export default function Profile() {
         schema={schema}
         initialData={profile}
         onSubmit={handleUpdateProfile}
+        autoComplete="off"
       >
         <Input placeholder="Digite seu nome" name="name" />
         <Input placeholder="Digite seu email" name="email" />

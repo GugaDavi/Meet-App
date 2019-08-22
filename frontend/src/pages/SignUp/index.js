@@ -8,8 +8,6 @@ import logo from '../../assets/logo.svg';
 
 import { signUpRequest } from '../../store/modules/auth/actions';
 
-import history from '../../services/history';
-
 const schema = Yup.object().shape({
   name: Yup.string().required('Insira um nome de usuario'),
   email: Yup.string()
@@ -34,7 +32,7 @@ export default function SignUp() {
   return (
     <>
       <img src={logo} alt="MeetApp" />
-      <Form onSubmit={handleSignOut} schema={schema}>
+      <Form onSubmit={handleSignOut} schema={schema} autoComplete="off">
         <Input placeholder="Digite seu Nome" name="name" autoComplete="off" />
         <Input placeholder="Digite seu e-mail" name="email" type="email" />
         <Input placeholder="Digite seu senha" name="password" type="password" />
