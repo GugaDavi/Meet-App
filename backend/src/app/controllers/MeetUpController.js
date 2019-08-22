@@ -16,6 +16,7 @@ class MeetUpController {
           attributes: ['id', 'path', 'url'],
         },
       ],
+      order: ['date'],
     });
 
     return res.json(meetups);
@@ -96,11 +97,14 @@ class MeetUpController {
       }
     }
 
-    const { title, description, localization, banner } = await meetapp.update(
-      req.body
-    );
+    const {
+      title,
+      description,
+      localization,
+      banner_id,
+    } = await meetapp.update(req.body);
 
-    return res.json({ title, description, localization, banner, date });
+    return res.json({ title, description, localization, banner_id, date });
   }
 
   async destroy(req, res) {
