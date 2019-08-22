@@ -15,8 +15,6 @@ export default function MeetUpDatails({ match }) {
 
   const selectMeetup = meetups[id];
 
-  console.tron.log(selectMeetup);
-
   const canceled = !!selectMeetup.canceled_at;
 
   return (
@@ -24,7 +22,7 @@ export default function MeetUpDatails({ match }) {
       <Content canceled={canceled}>
         <Title canceled={canceled}>
           <strong>{selectMeetup.title}</strong>
-          <MeetUpController canceled={canceled} meetupId={selectMeetup.id}/>
+          <MeetUpController canceled={canceled} meetupId={selectMeetup.id} />
         </Title>
         <div className="image">
           <img

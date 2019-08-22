@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 
+import history from '../../../services/history';
+
 import { Container, Manager, Canceled } from './styles';
 
 import { cancelMeetUpRequest } from '../../../store/modules/meetup/actions';
@@ -10,8 +12,12 @@ import { cancelMeetUpRequest } from '../../../store/modules/meetup/actions';
 export default function MeetUpController({ canceled, meetupId }) {
   const dispatch = useDispatch();
 
-  function handleCancelMeetup(meetuId) {
-    dispatch(cancelMeetUpRequest(meetuId));
+  function handleCancelMeetup(meetup_id) {
+    dispatch(cancelMeetUpRequest(meetup_id));
+  }
+
+  function handleUpdateMeetup(meetup_id) {
+    history.push('/meetup', { meetup_id });
   }
 
   return (
@@ -22,7 +28,11 @@ export default function MeetUpController({ canceled, meetupId }) {
         </Canceled>
       ) : (
         <Manager>
-          <button className="edit" type="button">
+          <button
+            className="edit"
+            type="button"
+            onClick={() => handleUpdateMeetup(meetupId)}
+          >
             <MdEdit size={20} color="#fff" style={{ marginRight: 5 }} />
             Editar
           </button>

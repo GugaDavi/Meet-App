@@ -67,8 +67,31 @@ export function* cancelMeetUp({ payload }) {
   history.push('/');
 }
 
+export function* updateMeetuUp({ payload }) {
+  try {
+    const { title, description, localization, date, banner_id } = payload.data;
+    const meetupId = payload.meetup.id;
+
+    yield call(api.put, `meetups/${meetupId}`, {
+      title,
+      description,
+      localization,
+      date,
+      banner_id,
+    });
+
+    yield meetUpList();
+
+    toast.success('MeetUp atualizado com sucesso!');
+  } catch (error) {
+    toast.error('Erro ao atualizar meetup. Verifique os dados');
+    console.tron.log(error);
+  }
+}
+
 export default all([
   takeLatest('@meetup/CREATE_MEETUP_REQUEST', createMeetUp),
   takeLatest('@meetup/MEET_LIST_REQUEST', meetUpList),
   takeLatest('@meetup/CANCEL_MEETUP', cancelMeetUp),
+  takeLatest('@meetup/UPDATE_MEETUP_REQUEST', updateMeetuUp),
 ]);
