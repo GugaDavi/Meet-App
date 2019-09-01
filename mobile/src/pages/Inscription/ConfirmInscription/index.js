@@ -1,8 +1,10 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import PropTypes from 'prop-types';
 
-import api from '../../../services/api';
+import { newRegisteRequest } from '../../../store/modules/register/actions';
 
 import { Container, Confim } from './styles';
 import Background from '../../../components/Background';
@@ -11,9 +13,10 @@ import Card from '../../../components/Card';
 
 export default function ConfirmInscription({ navigation }) {
   const meetup = navigation.getParam('meetup');
+  const dispatch = useDispatch();
 
-  async function handleConfirm(meetupId) {
-    await api.post(`inscriptions/${meetupId}`);
+  function handleConfirm(meetupId) {
+    dispatch(newRegisteRequest(meetupId));
 
     navigation.navigate('Inscription');
   }
@@ -29,6 +32,7 @@ export default function ConfirmInscription({ navigation }) {
             date={meetup.dateFormatted}
             description={meetup.description}
             onPress={() => handleConfirm(meetup.id)}
+            textButton="Confirmar Escrição"
           />
         </Confim>
       </Container>
@@ -44,3 +48,7 @@ ConfirmInscription.navigationOptions = ({ navigation }) => ({
     </TouchableOpacity>
   ),
 });
+
+ConfirmInscription.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
