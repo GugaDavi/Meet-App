@@ -1,16 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // import { Container } from './styles';
+import Background from '../../components/Background';
 
 export default function Inscription() {
-  return <View />;
+  return (
+    <Background>
+      <Text>Inscriptions</Text>
+    </Background>
+  );
 }
-
-Inscription.navigationOptions = {
-  tabBarLabel: 'Incrições',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="local-offer" size={20} color={tintColor} />
-  ),
-};

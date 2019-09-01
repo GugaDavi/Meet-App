@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import PropTypes from 'prop-types';
 
 import noImage from '../../assets/error.png';
 
@@ -24,6 +25,7 @@ export default function Card({
   date,
   description,
   manager,
+  onPress,
 }) {
   return (
     <Container>
@@ -62,9 +64,28 @@ export default function Card({
         {manager ? (
           <Manager>Você é o responsavel por esse evento</Manager>
         ) : (
-          <Inscription>Realizar Inscrição</Inscription>
+          <Inscription onPress={onPress}>Realizar Inscrição</Inscription>
         )}
       </Infos>
     </Container>
   );
 }
+
+Card.propTypes = {
+  banner: PropTypes.string,
+  title: PropTypes.string,
+  local: PropTypes.string,
+  date: PropTypes.string,
+  description: PropTypes.string,
+  manager: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+};
+
+Card.defaultProps = {
+  banner: '',
+  title: '',
+  local: '',
+  date: '',
+  description: '',
+  manager: false,
+};

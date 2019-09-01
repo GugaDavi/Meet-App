@@ -7,9 +7,13 @@ import { Container, Date, MeetUpsList } from './styles';
 import Background from '../../components/Background';
 import Card from '../../components/Card';
 
-export default function Dashboard() {
+export default function Dashboard({ navigation }) {
   const meetups = useSelector(state => state.meetup.meetups);
   const profile = useSelector(state => state.user.profile);
+
+  function handleInscription(meetup) {
+    navigation.navigate('ConfirmInscription', { meetup });
+  }
 
   return (
     <Background>
@@ -26,6 +30,7 @@ export default function Dashboard() {
               date={item.dateFormatted}
               description={item.description}
               manager={item.user_id === profile.id}
+              onPress={() => handleInscription(item)}
             />
           )}
         />
