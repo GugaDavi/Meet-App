@@ -1,8 +1,42 @@
 import React from 'react';
-import { View } from 'react-native';
+import { useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// import { Container } from './styles';
+import { Container, Date, MeetUpsList } from './styles';
+
+import Background from '../../components/Background';
+import Card from '../../components/Card';
 
 export default function Dashboard() {
-  return <View />;
+  const meetups = useSelector(state => state.meetup.meetups);
+  const profile = useSelector(state => state.user.profile);
+
+  return (
+    <Background>
+      <Container>
+        <Date>31 Agosto</Date>
+        <MeetUpsList
+          data={meetups}
+          keyExtractor={meetup => String(meetup.id)}
+          renderItem={({ item }) => (
+            <Card
+              banner={item.File ? item.File.url : null}
+              title={item.title}
+              local={item.localization}
+              date={item.dateFormatted}
+              description={item.description}
+              manager={item.user_id === profile.id}
+            />
+          )}
+        />
+      </Container>
+    </Background>
+  );
 }
+
+Dashboard.navigationOptions = {
+  tabBarLabel: 'MeetUps',
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="format-list-bulleted" size={20} color={tintColor} />
+  ),
+};
