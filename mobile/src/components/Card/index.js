@@ -26,6 +26,7 @@ export default function Card({
   description,
   manager,
   onPress,
+  textButton,
 }) {
   return (
     <Container>
@@ -64,7 +65,7 @@ export default function Card({
         {manager ? (
           <Manager>Você é o responsavel por esse evento</Manager>
         ) : (
-          <Inscription onPress={onPress}>Realizar Inscrição</Inscription>
+          <Inscription onPress={onPress}>{textButton}</Inscription>
         )}
       </Infos>
     </Container>
@@ -79,6 +80,7 @@ Card.propTypes = {
   description: PropTypes.string,
   manager: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
+  textButton: PropTypes.string,
 };
 
 Card.defaultProps = {
@@ -88,4 +90,5 @@ Card.defaultProps = {
   date: '',
   description: '',
   manager: false,
+  textButton: '',
 };
