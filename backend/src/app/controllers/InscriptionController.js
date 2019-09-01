@@ -27,7 +27,7 @@ class InscriptionController {
       order: [[MeetUp, 'date']],
     });
 
-    return res.json({ meetups });
+    return res.json(meetups);
   }
 
   async store(req, res) {
@@ -101,29 +101,29 @@ class InscriptionController {
     const { id: user_id } = user;
     const { id: meetup_id } = meetup;
 
-    const inscription = await Inscription.create({
+    await Inscription.create({
       user_id,
       meetup_id,
     });
 
     // Notify Manager
 
-    const formattedDate = format(meetup.date, "dd/MM/yyyy 'às' HH:mm'h'");
+    // const formattedDate = format(meetup.date, "dd/MM/yyyy 'às' HH:mm'h'");
 
-    await Mail.sendMail({
-      to: `${meetup.User.name} <${meetup.User.email}>`,
-      subject: `Inscrição efetuada`,
-      template: 'register',
-      context: {
-        manager: meetup.User.name,
-        meetup: meetup.title,
-        date: formattedDate,
-        user: user.name,
-        email: user.email,
-      },
-    });
+    // await Mail.sendMail({
+    //   to: `${meetup.User.name} <${meetup.User.email}>`,
+    //   subject: `Inscrição efetuada`,
+    //   template: 'register',
+    //   context: {
+    //     manager: meetup.User.name,
+    //     meetup: meetup.title,
+    //     date: formattedDate,
+    //     user: user.name,
+    //     email: user.email,
+    //   },
+    // });
 
-    return res.json({ inscription });
+    return res.send();
   }
 }
 
