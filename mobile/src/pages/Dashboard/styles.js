@@ -14,4 +14,6 @@ export const Date = styled.Text`
   margin-bottom: 30px;
 `;
 
-export const MeetUpsList = styled.FlatList``;
+export const MeetUpsList = styled.FlatList.attrs({
+  showVerticalScollIndicator: false,
+})``;
