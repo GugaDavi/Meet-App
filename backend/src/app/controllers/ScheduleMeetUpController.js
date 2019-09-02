@@ -12,6 +12,11 @@ class ScheduleMeetUpController {
 
     if (!date) {
       meetups = await MeetUp.findAll({
+        where: {
+          date: {
+            [Op.gt]: new Date(),
+          },
+        },
         include: [
           {
             model: File,
