@@ -4,6 +4,7 @@ import { isBefore, startOfHour, format } from 'date-fns';
 import Inscription from '../models/Inscription';
 import MeetUp from '../models/MeetUp';
 import User from '../models/User';
+import File from '../models/File';
 
 import Mail from '../../lib/Mail';
 
@@ -18,9 +19,15 @@ class InscriptionController {
           model: MeetUp,
           where: {
             date: {
-              [Op.gt]: new Date(),
+              [Op.gte]: new Date(),
             },
           },
+          include: [
+            {
+              model: File,
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
           required: true,
         },
       ],
@@ -122,6 +129,14 @@ class InscriptionController {
     //     email: user.email,
     //   },
     // });
+
+    return res.send();
+  }
+
+  async destroy(req, res) {
+    const inscription = await Inscription.findByPk(req.params.inscriptionId);
+
+    await inscription.destroy();
 
     return res.send();
   }
